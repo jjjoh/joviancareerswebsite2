@@ -1,6 +1,6 @@
 
 
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine#, text
 import os
 import mysql.connector
 from dotenv import load_dotenv
@@ -31,8 +31,8 @@ engine = create_engine(
     }
     )
 
-with engine.connect() as conn:
-    result = conn.execute(text("select * from jobs"))
-    print(result.all())
+#with engine.connect() as conn:
+#    result = conn.execute(text("select * from jobs"))
+#    print(result.all())
 
     

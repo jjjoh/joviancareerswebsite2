@@ -14,9 +14,9 @@ def load_jobs_from_db():
 
 @app.route("/")
 def hello_jovian():
-    jobs = load_jobs_from_db()
+    jobs_list = load_jobs_from_db()
     return render_template('home.html' ,
-                           jobs=jobs,
+                           jobs=jobs_list,
                            company_name='Jovian')
 
 @app.route("/api/jobs")
