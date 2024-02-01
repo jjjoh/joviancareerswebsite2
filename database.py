@@ -1,6 +1,6 @@
 
 
-from sqlalchemy import create_engine#, text
+from sqlalchemy import create_engine, text
 import os
 import mysql.connector
 from dotenv import load_dotenv
@@ -12,21 +12,18 @@ connection = mysql.connector.connect(
   password= os.getenv("DB_PASSWORD"),
   database= os.getenv("DB_NAME"),
   ssl_verify_identity=True,
-  ssl_ca='C:/ssl/cacert-2023-12-12.pem'
+  ssl_ca='secret_url'
 )
 
 
 connection_string = str(connection) 
 
-url = "https://example.com?host=" + os.getenv("DB_HOST") + "&user=" + os.getenv("DB_USERNAME") + "&password=" + os.getenv("DB_PASSWORD") + "&database=" + os.getenv("DB_NAME") + "&autocommit=True&ssl_mode=VERIFY_IDENTITY&ssl_ca=/etc/ssl/cert.pem"
-
-
 engine = create_engine(
-    "mysql+pymysql://2sjk5ktin3xwi79i79qx:pscale_pw_GG6Y6FXzMhp1uQ2LWkahK7S2lRQWuiegWECX5uXh57x@aws.connect.psdb.cloud/joviancareers?charset=utf8mb4",
+    "mysql+pymysql://user:password@host/db?charset=utf8mb4",
     connect_args={
         "ssl":{
             "ssl_verify_identity":True,
-            "ca" : "C:/ssl/cacert-2023-12-12.pem"
+            "ca" : "secret_url"
         }
     }
     )
@@ -35,4 +32,10 @@ engine = create_engine(
 #    result = conn.execute(text("select * from jobs"))
 #    print(result.all())
 
-    
+def load_jobs_from_db():
+    with engine.connect() as conn:
+        result = conn.execute(text("select * from jobs"))
+        jobs = []
+        for row in result.all():
+            jobs.append(dict(row))
+        return jobs       
