@@ -5,11 +5,11 @@ import os
 import mysql.connector
 
 connection = mysql.connector.connect(
-  host= "DB_HOST",
-  user="DB_USERNAME",
-  password="DB_PASSWORD",
-  database="DB_NAME",
-  ssl_ca="CA"
+  host= os.getenv('DB_HOST'),
+  user=os.getenv('DB_USERNAME'),
+  password=os.getenv('DB_PASSWORD'),
+  database=os.getenv('DB_NAME'),
+  ssl_ca=os.getenv('CA')
 )
 
 
