@@ -9,7 +9,6 @@ connection = mysql.connector.connect(
   user="DB_USERNAME",
   password="DB_PASSWORD",
   database="DB_NAME",
-  ssl_verify_identity=True,
   ssl_ca="CA"
 )
 
@@ -21,7 +20,6 @@ engine = create_engine(
     "mysql+pymysql://"+str(connection.user)+":"+str(connection.password)+"@"+str(connection.host)+"/"+str(connection.database)+"?charset=utf8mb4",
     connect_args={
         "ssl":{
-            "ssl_verify_identity":True,
             "ca" : str(connection.ssl_ca)
         }
     }
