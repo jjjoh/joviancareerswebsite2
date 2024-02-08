@@ -12,18 +12,19 @@ connection = mysql.connector.connect(
   password= os.getenv("DB_PASSWORD"),
   database= os.getenv("DB_NAME"),
   ssl_verify_identity=True,
-  ssl_ca='secret_url'
+  ssl_ca=os.getenv("CA")
 )
 
 
-connection_string = str(connection) 
+#connection_string = str(connection) 
+#return connection_string
 
 engine = create_engine(
-    "mysql+pymysql://user:password@host/db?charset=utf8mb4",
+    "mysql+pymysql://"+str(connection.user)+":"+str(connection.password)+"@"+str(connection.host)+"/"+str(connection.database)+"?charset=utf8mb4",
     connect_args={
         "ssl":{
             "ssl_verify_identity":True,
-            "ca" : "secret_url"
+            "ca" : str(connection.ssl_ca)
         }
     }
     )
