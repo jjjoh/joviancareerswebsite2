@@ -4,7 +4,7 @@ from sqlalchemy import create_engine, text
 from dotenv import load_dotenv
 
 #Load environment variablels from the .env file
-load_dotenv
+load_dotenv()
 import os
 import MySQLdb
 
