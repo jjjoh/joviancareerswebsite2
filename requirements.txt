@@ -3,3 +3,4 @@ gunicorn
 sqlalchemy
 mysqlclient
 python-dotenv
+PyMySQL
