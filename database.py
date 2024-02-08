@@ -3,16 +3,14 @@
 from sqlalchemy import create_engine, text
 import os
 import mysql.connector
-from dotenv import load_dotenv
-load_dotenv(dotenv_path="/etc/secrets/.env")
 
 connection = mysql.connector.connect(
-  host= os.getenv("DB_HOST"),
-  user=os.getenv("DB_USERNAME"),
-  password= os.getenv("DB_PASSWORD"),
-  database= os.getenv("DB_NAME"),
+  host= "DB_HOST",
+  user="DB_USERNAME",
+  password="DB_PASSWORD",
+  database="DB_NAME",
   ssl_verify_identity=True,
-  ssl_ca="/etc/secrets/cacert-2023-12-12.pem"
+  ssl_ca="CA"
 )
 
 
