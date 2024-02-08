@@ -3,4 +3,3 @@ gunicorn
 sqlalchemy
 mysql.connector
 dotenv
-os
