@@ -45,8 +45,8 @@ finally:
 #return connection_string
 
 engine = create_engine(
-  "mysql+pymysql://"+str(connection.user)+":"+str(connection.password)+"@"+str(connection.host)+"/"+str(connection.db)+"?charset=utf8mb4",
-  connect_args={"ssl":{"ca" : str(connection.ssl)}}
+  "mysql+pymysql://"+os.getenv('DATABASE_USERNAME')+":"+os.getenv('DATABASE_PASSWORD')+"@"+os.getenv('DATABASE_HOST')+"/"+os.getenv('DATABASE')+"?charset=utf8mb4",
+  connect_args={"ssl":{"ca" : os.getenv('CA')}}
 )
 
 #with engine.connect() as conn:
