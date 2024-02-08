@@ -1,4 +1,5 @@
 Flask
 gunicorn
 sqlalchemy
-mysql.connector
+mysqlclient
+python-dotenv

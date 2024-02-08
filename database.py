@@ -1,29 +1,53 @@
 
 
 from sqlalchemy import create_engine, text
-import os
-import mysql.connector
+from dotenv import load_dotenv
 
-connection = mysql.connector.connect(
-  host= os.getenv('DB_HOST'),
-  user=os.getenv('DB_USERNAME'),
-  password=os.getenv('DB_PASSWORD'),
-  database=os.getenv('DB_NAME'),
-  ssl_ca=os.getenv('CA')
+#Load environment variablels from the .env file
+load_dotenv
+import os
+import MySQLdb
+
+#Connect to the database
+connection = MySQLdb.connect(
+  host= os.getenv('DATABASE_HOST'),
+  user=os.getenv('DATABASE_USERNAME'),
+  password=os.getenv('DATABASE_PASSWORD'),
+  db=os.getenv('DATABASE'),
+  autocommit=True,
+  ssl_mode='VERIFY_IDENTITY',
+  ssl={'ca': str(os.getenv('CA'))}
 )
 
+try:
+    # Create a cursor to interact with the database
+    cursor = connection.cursor()
 
+    # Execute "SHOW TABLES" query
+    cursor.execute("SHOW TABLES")
+
+    # Fetch all the rows
+    tables = cursor.fetchall()
+
+    # Print out the tables
+    print("Tables in the database:")
+    for table in tables:
+        print(table[0])
+
+except MySQLdb.Error as e:
+    print("MySQL Error:", e)
+
+finally:
+    # Close the cursor and connection
+    cursor.close()
+    connection.close()
 #connection_string = str(connection) 
 #return connection_string
 
 engine = create_engine(
-    "mysql+pymysql://"+str(connection.user)+":"+str(connection.password)+"@"+str(connection.host)+"/"+str(connection.database)+"?charset=utf8mb4",
-    connect_args={
-        "ssl":{
-            "ca" : str(connection.ssl_ca)
-        }
-    }
-    )
+  "mysql+pymysql://"+str(connection.user)+":"+str(connection.password)+"@"+str(connection.host)+"/"+str(connection.db)+"?charset=utf8mb4",
+  connect_args={"ssl":{"ca" : str(connection.ssl)}}
+)
 
 #with engine.connect() as conn:
 #    result = conn.execute(text("select * from jobs"))
