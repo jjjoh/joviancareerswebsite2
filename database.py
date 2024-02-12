@@ -24,8 +24,11 @@ try:
     cursor = connection.cursor()
 
     # Execute "CREATE TABLE" query
-    cursor.execute("CREATE TABLE jobs(id INT NOT NULL AUTO_INCREMENT,title VARCHAR(120) NOT NULL,location VARCHAR(120) NOT NULL, salary INT,currency VARCHAR(10), responsibilities VARCHAR(2000),requirements VARCHAR(2000), create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,PRIMARY KEY (id))"
-    )
+    #cursor.execute("CREATE TABLE jobs(id INT NOT NULL AUTO_INCREMENT,title VARCHAR(120) NOT NULL,location VARCHAR(120) NOT NULL, salary INT,currency VARCHAR(10), responsibilities VARCHAR(2000),requirements VARCHAR(2000), create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,PRIMARY KEY (id))"
+    #)
+
+    cursor.execute("INSERT INTO jobs (title, location,salary) VALUES (‘Frontend Developper’,’Sao Paulo’,‘5000’), (‘Backend Developper’,’Remote’)"
+     )
 
     # Fetch all the rows
     tables = cursor.fetchall()
