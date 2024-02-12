@@ -19,9 +19,9 @@ connection = MySQLdb.connect(
   ssl={'ca': str(os.getenv('CA'))}
 )
 
-try:
+#try:
     # Create a cursor to interact with the database
-    cursor = connection.cursor()
+#    cursor = connection.cursor()
 
     # Execute "CREATE TABLE" query
     #cursor.execute("CREATE TABLE jobs(id INT NOT NULL AUTO_INCREMENT,title VARCHAR(120) NOT NULL,location VARCHAR(120) NOT NULL, salary INT,currency VARCHAR(10), responsibilities VARCHAR(2000),requirements VARCHAR(2000), create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,PRIMARY KEY (id))"
@@ -31,20 +31,20 @@ try:
     # )
 
     # Fetch all the rows
-    tables = cursor.fetchall()
+#    tables = cursor.fetchall()
 
     # Print out the tables
-    print("Tables in the database:")
-    for table in tables:
-        print(table[0])
+#    print("Tables in the database:")
+#    for table in tables:
+#        print(table[0])
 
-except MySQLdb.Error as e:
-    print("MySQL Error:", e)
+#except MySQLdb.Error as e:
+#    print("MySQL Error:", e)
 
-finally:
+#finally:
     # Close the cursor and connection
-    cursor.close()
-    connection.close()
+#    cursor.close()
+#    connection.close()
 #connection_string = str(connection) 
 #return connection_string
 
@@ -57,12 +57,26 @@ engine = create_engine(
 #    result = conn.execute(text("select * from jobs"))
 #    print(result.all())
 
+#def load_jobs_from_db():
+#    with engine.connect() as conn:
+#        result = conn.execute(text("select * from jobs"))
+#        jobs = []
+#        for row in result:
+#            jobs.append(dict(row))
+#        return jobs
+
+#def load_jobs_from_db():
+#    with engine.connect() as conn:
+#        result = conn.execute(text("select * from jobs"))
+#        jobs = [dict(row) for row in result]
+#        return jobs
+    
 def load_jobs_from_db():
     with engine.connect() as conn:
         result = conn.execute(text("select * from jobs"))
         jobs = []
         for row in result:
-            jobs.append(dict(row.items()))
+            print(type(row))  # Affiche le type de 'row'
+            jobs.append(dict[row])
         return jobs
-
-
+    
