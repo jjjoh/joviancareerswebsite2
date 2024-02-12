@@ -23,8 +23,20 @@ try:
     # Create a cursor to interact with the database
     cursor = connection.cursor()
 
-    # Execute "SHOW TABLES" query
-    cursor.execute("SHOW TABLES")
+    # Execute "CREATE TABLE" query
+    cursor.execute(
+      "CREATE TABLE jobs(
+        id INT NOT NULL AUTO_INCREMENT,
+        title VARCHAR(120) NOT NULL,
+        location VARCHAR(120) NOT NULL,
+        salary INT,
+        currency VARCHAR(10)
+        responsibilities VARCHAR(2000),
+        requirements VARCHAR(2000),
+        create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (id)              
+      )"
+    )
 
     # Fetch all the rows
     tables = cursor.fetchall()
