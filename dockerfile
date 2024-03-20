@@ -7,7 +7,7 @@ FROM --platform=linux/amd64 python:3.12-alpine
 COPY . /app
 
 # Copy the SSL certificate file
-COPY cacert-2023-12-12.pem /etc/secrets/cacert-2023-12-12.pem
+COPY C:\ssl\cacert-2023-12-12.pem /etc/secrets/cacert-2023-12-12.pem
 
 #Définit le répertoire de travail
 WORKDIR /app
