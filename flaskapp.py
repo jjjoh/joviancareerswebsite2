@@ -15,6 +15,9 @@ def hello_jovian():
 def list_jobs():
     return jsonify(load_jobs_from_db)
 
+@app.route('/always_ok', methods=['GET'])
+def always_ok():
+    return jsonify({'message': 'OK'}), 200
 
 if __name__ == '__main__':
     app.run(host= '0.0.0.0', debug=True)
