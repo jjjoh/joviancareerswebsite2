@@ -1,0 +1,44 @@
+#Ce fichier YAML pour Github Actions définit un workflow qui se déclenche à chaque push sur la branche main du dépôt. 
+#Lorsqu’il est déclenché, il construit une image Docker à partir du code source, puis la pousse vers le repo privé jjjoh/joviancareerwebsitev2 sur Docker Hub.
+
+
+# Nom du workflow. Il s'affiche dans l'onglet Actions du dépôt GitHub.
+name: Build and Push Docker Image
+
+# Les événements qui déclenchent le workflow.
+on:
+  # Ce workflow se déclenche lors d'un push sur la branche 'main'.
+  push:
+    branches:
+      - main
+
+# Les jobs que le workflow va exécuter.
+jobs:
+  # Un job pour construire et pousser l'image Docker.
+  build:
+    # Le type de runner qui va exécuter ce job.
+    runs-on: ubuntu-latest
+
+    # Les étapes que le job va exécuter.
+    steps:
+    # Cette étape vérifie le code source du dépôt GitHub dans le runner.
+    - name: Check Out Repo
+      uses: actions/checkout@v2
+
+    # Cette étape se connecte à Docker Hub en utilisant un nom d'utilisateur et un token d'accès.
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+    # Cette étape construit et pousse l'image Docker vers Docker Hub.
+    - name: Build and Push Docker Image
+      uses: docker/build-push-action@v2
+      with:
+        # Le contexte est le répertoire contenant le Dockerfile.
+        context: .
+        # Indique que l'image doit être poussée vers Docker Hub.
+        push: true
+        # Les tags de l'image Docker à pousser.
+        tags: jjjoh/joviancareerwebsitev2:latest
