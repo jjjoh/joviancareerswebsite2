@@ -1,5 +1,10 @@
-#Ce fichier YAML pour Github Actions définit un workflow qui se déclenche à chaque push sur la branche main du dépôt. 
-#Lorsqu’il est déclenché, il construit une image Docker à partir du code source, puis la pousse vers le repo privé jjjoh/joviancareerwebsitev2 sur Docker Hub.
+#Nom du fichier : docker-image.yml
+#Version : 1.0.0
+#Auteur : Johanne Schatz 
+#Description : 
+##Ce fichier de workflow GitHub Actions automatise la construction de l'image Docker et sa mise à disposition sur Docker Hub.
+##Il définit un pipeline qui se déclenche à chaque push sur la branche main du dépôt. Lorsqu’il est déclenché, il construit une image Docker à partir du code source, ajoute comme tag son SHA de commit, puis la pousse vers le repo privé jjjoh/joviancareerwebsitev2 sur Docker Hub.
+##Ce fichier a été partiellement rédigé avec l'aide de Bing Copilot
 
 
 # Nom du workflow. Il s'affiche dans l'onglet Actions du dépôt GitHub.
@@ -19,8 +24,8 @@ jobs:
     # Le type de runner qui va exécuter ce job.
     runs-on: ubuntu-latest
 
-    # Les étapes que le job va exécuter.
-    steps:
+    # Les étapes que le job va exécuter. 
+    steps:   
     # Cette étape vérifie le code source du dépôt GitHub dans le runner.
     - name: Check Out Repo
       uses: actions/checkout@v2
@@ -32,6 +37,11 @@ jobs:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
+    # Cette étape récupère le hash de commit court du dernier commit sur la branche. 
+    - name: Get short SHA # nom de l’étape, qui apparaîtra dans les logs de GitHub Actions.
+      id: sha # identifiant de l’étape, utilisé pour référencer les résultats de cette étape dans d’autres parties du workflow.
+      run: echo "::set-output name=sha::$(git rev-parse --short HEAD)" #commande exécutéee pendant cette étape. Elle utilise la commande git rev-parse --short HEAD pour obtenir le hash de commit court du dernier commit. Ensuite, elle utilise ::set-output name=sha:: pour enregistrer ce hash de commit comme une sortie de cette étape, qui peut être référencée plus tard dans le workflow en utilisant steps.sha.outputs.sha
+
     # Cette étape construit et pousse l'image Docker vers Docker Hub.
     - name: Build and Push Docker Image
       uses: docker/build-push-action@v2
@@ -40,5 +50,5 @@ jobs:
         context: .
         # Indique que l'image doit être poussée vers Docker Hub.
         push: true
-        # Les tags de l'image Docker à pousser.
-        tags: jjjoh/joviancareerwebsitev2:latest
+        # Les tags de l'image Docker à pousser. Ici <nom d'utilisateur dockerhub>/<nom du repo>:<hash court du commit récupéré à l'étape "Get short SHA".
+        tags: jjjoh/joviancareerwebsitev2:${{ steps.sha.outputs.sha }}
