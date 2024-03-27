@@ -1,11 +1,9 @@
 #Nom du fichier : docker-image.yml
-#Version : 1.0.0
+#Version : 1-0-0
 #Auteur : Johanne Schatz 
 #Description : 
 ##Ce fichier de workflow GitHub Actions automatise la construction de l'image Docker et sa mise à disposition sur Docker Hub.
 ##Il définit un pipeline qui se déclenche à chaque push sur la branche main du dépôt. Lorsqu’il est déclenché, il construit une image Docker à partir du code source, ajoute comme tag son SHA de commit, puis la pousse vers le repo privé jjjoh/joviancareerwebsitev2 sur Docker Hub.
-##Ce fichier a été partiellement rédigé avec l'aide de Bing Copilot
-
 
 # Nom du workflow. Il s'affiche dans l'onglet Actions du dépôt GitHub.
 name: Build and Push Docker Image

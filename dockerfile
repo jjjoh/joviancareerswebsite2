@@ -19,8 +19,6 @@ RUN apk update && \
 # Install Python dependencies from requirements.txt
 RUN pip install -r requirements.txt
 
-#RUN --mount=type=secret,id=joviancareerdbsecret ./joviancareerdbsecret.txt
-
 # Expose le port sur lequel l'application s'exécute
 EXPOSE 5000
 
