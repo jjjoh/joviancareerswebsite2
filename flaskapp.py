@@ -22,5 +22,9 @@ def list_jobs():
 def always_ok():
     return jsonify({'message': 'OK'}), 200
 
+@app.route("api/prommetrics")
+def metricsprom():
+    return jsonify(metrics)
+
 if __name__ == '__main__':
     app.run(host= '0.0.0.0', port=5000, debug=True)
