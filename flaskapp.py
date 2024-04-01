@@ -13,7 +13,6 @@ def hello_jovian():
                            jobs=jobs_list,
                            company_name='Jovian')
 
-
 @app.route("/api/jobs")
 def list_jobs():
     return jsonify(load_jobs_from_db)
