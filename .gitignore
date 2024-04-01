@@ -1,5 +1,9 @@
 #Secrets
 secrets.py
+joviancareerdbsecret.txt
+
+#Docker compose
+docker-compose.yml
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
