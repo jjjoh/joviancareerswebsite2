@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify
-from prometheus_flask_exporter import PrometheusMetrics
 from database import load_jobs_from_db
+from prometheus_flask_exporter import PrometheusMetrics
 
 
 app = Flask(__name__)
