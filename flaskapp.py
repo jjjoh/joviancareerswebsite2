@@ -22,7 +22,7 @@ def list_jobs():
 def always_ok():
     return jsonify({'message': 'OK'}), 200
 
-@app.route("api/prommetrics")
+@app.route("/api/prommetrics")
 def metricsprom():
     return jsonify(metrics)
 
