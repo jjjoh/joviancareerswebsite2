@@ -7,7 +7,9 @@ app = Flask(__name__)
 metrics = PrometheusMetrics(app)
 
 # Métriques par défaut pour les requêtes HTTP
-metrics.info('app_info', 'Application info', version='1.0.3')
+metrics.info('app_info', 
+             'Application info', 
+             version='1.0.3')
 
 @app.route("/")
 def hello_jovian():
