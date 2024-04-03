@@ -17,7 +17,7 @@ WORKDIR /app
 
 # Install necessary dependencies
 RUN apk update && \
-    apk add --no-cache gcc musl-dev mariadb-connector-c-dev pkgconf prometheus-client
+    apk add --no-cache gcc musl-dev mariadb-connector-c-dev pkgconf
 
 # Install Python dependencies from requirements.txt
 RUN pip install -r requirements.txt

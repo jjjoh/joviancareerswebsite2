@@ -5,4 +5,5 @@ mysqlclient
 mysql-connector-python
 python-dotenv
 PyMySQL
+prometheus-client
 prometheus-flask-exporter
