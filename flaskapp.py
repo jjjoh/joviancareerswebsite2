@@ -1,8 +1,7 @@
 from flask import Flask, render_template, jsonify
 from database import load_jobs_from_db
 from prometheus_flask_exporter import PrometheusMetrics
-import datetime
-
+from datetime import datetime
 
 app = Flask(__name__)
 metrics = PrometheusMetrics(app)
@@ -19,7 +18,8 @@ def hello_jovian():
 
 @app.route("/api/jobs")
 def list_jobs():
-    return jsonify(jobs)
+    str_jobs = str(load_jobs_from_db())
+    return jsonify (str_jobs)
 
 @app.route('/always_ok', methods=['GET'])
 def always_ok():
